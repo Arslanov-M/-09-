@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Review;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,9 +16,20 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            LocationSeeder::class,
+            CategoryTagSeeder::class,
         ]);
+
+        User::factory()
+            ->count(20)
+            ->create();
+
+        Review::factory()
+            ->count(40)
+            ->create();
+
+
     }
+
 }
